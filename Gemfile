@@ -41,9 +41,6 @@ gem 'angularjs-rails'
 #devise
 gem 'devise', '~> 3.4.1'
 
-#sqlit3
-gem 'sqlite3', '~> 1.3.13'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

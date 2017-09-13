@@ -1,10 +1,5 @@
-Rails.application.routes.draw do
-  Rails.application.routes.draw do
-      devise_for :users, controllers: {
-        sessions: 'sessions'
-      }
-  
-  devise_for :travelers, controllers: { sessions: 'travelers/sessions' }
+Rails.application.routes.draw do  
+  #devise_for :travelers, controllers: { sessions: 'travelers/sessions' }
   devise_for :travelers, path: 'auth', path_names: { sign_in: 'login', 
                                                  sign_out: 'logout',
                                                  password: 'secret', 
@@ -12,9 +7,6 @@ Rails.application.routes.draw do
                                                  unlock: 'unblock', registration: 
                                                 'register', sign_up: 'cmon_let_me_in' }
 
-  devise_scope :user do
-    get 'sign_in', to: 'devise/sessions#new'
-  end
 
   resources :trips
   resources :travelers
@@ -76,5 +68,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  root 'home#index'
+    root 'home#index'
 end
