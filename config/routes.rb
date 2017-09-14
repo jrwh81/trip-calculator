@@ -1,4 +1,10 @@
 Rails.application.routes.draw do  
+  get 'travelers_trips/new'
+
+  get 'travelers_trips/create'
+
+  get 'travelers_trips/destroy'
+
   get 'home/index'
 
   resources :exspenses
@@ -13,12 +19,20 @@ Rails.application.routes.draw do
 
   devise_scope :travelers do
     get '/travelers/create' => 'travelers/registrations#create'
-  end 
+  end
 
-  resources :trips
+  devise_scope :trips do
+    
+  end
+
+  #
+
+
+
+  resources :trips, only: [:index,:new,:create,:show,:edit,:update]
+  post 'trip/add_traveler/:id' => 'trips#add_traveler_to_trip'
+  
   resources :travelers
-
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,7 +1,7 @@
 class CreateTrips < ActiveRecord::Migration
   def change
     create_table :trips do |t|
-      t.float :total_cost
+      t.decimal :total_cost, :precision => 10, :scale => 2
       t.string :name
       t.string :description
 

@@ -5,6 +5,7 @@ class TravelersController < ApplicationController
   # GET /travelers.json
   def index
     @travelers = Traveler.all
+    @trip = Trip.find(params[:format])
   end
 
   # GET /travelers/1

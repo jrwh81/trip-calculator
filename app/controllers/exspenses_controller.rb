@@ -37,6 +37,10 @@ class ExspensesController < ApplicationController
     end
   end
 
+  def add_exspense_to_trip
+
+  end
+
   # PATCH/PUT /exspenses/1
   # PATCH/PUT /exspenses/1.json
   def update

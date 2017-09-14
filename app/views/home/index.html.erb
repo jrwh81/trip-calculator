@@ -1,4 +1,44 @@
-<h1>Welcome to the Trip Calculator</h1>
-<p>This is a tool that will help you and your friends calculate how much each of you spent and/or owe after a trip.</p>
 
-<%= link_to "Log in", new_traveler_session_path %><br />
+<% if traveler_signed_in? %>
+      <h2>Welcome <%= current_traveler.user_name %>!<h2>
+      <p>This is a tool that will help you and your friends calculate how much each of you spent and/or owe after a trip.</p>
+
+      <% if current_traveler.trips.present? %>
+         <center>My Trips</center>
+         <center><div class="table-responsive">
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th>Name&nbsp;</th>
+                     <th>Description&nbsp;</th>
+                     <th>Total Cost&nbsp;</th>
+                     <th>Actions&nbsp;</td>
+                  </tr>
+               </thead>
+               <br>
+               <tbody>
+                  <% current_traveler.trips.each do |trip| %>
+                  <tr>
+                     <td><%= "#{trip.name}" %></td>
+                     <td><%= "#{trip.description}" %></td>
+                     <td><%= "#{trip.total_cost}" %></td>
+                     <td><%= link_to 'Show', trip %></td>
+                  </tr>
+                  <% end %>
+               </tbody>
+            </table>
+         </div></center>
+      <% end %>   
+      <br />
+      <%= link_to "Create a Trip", new_trip_path %><br />
+      <%= link_to "Join a Trip", trips_path %><br />
+
+
+<% else %>
+   
+   <h1>Welcome to the Trip Calculator</h1>
+   <p>This is a tool that will help you and your friends calculate how much each of you spent and/or owe after a trip.</p>
+
+
+
+<% end %>
