@@ -1,17 +1,18 @@
 class Travelers::SessionsController < Devise::SessionsController
-  before_filter :configure_sign_in_params, only: [:create]
+    skip_before_filter :require_no_authentication 
 
-  GET /resource/sign_in
+
+  #GET /resource/sign_in
   def new
     super
   end
 
-  POST /resource/sign_in
+  #POST /resource/sign_in
   def create
     super
   end
 
-  DELETE /resource/sign_out
+  #DELETE /resource/sign_out
   def destroy
     super
   end
@@ -19,7 +20,7 @@ class Travelers::SessionsController < Devise::SessionsController
   protected
 
   #You can put the params you want to permit in the empty array.
-  def configure_sign_in_params
-    devise_parameter_sanitizer.for(:sign_in) << :email, :password, :confirmation_password
-  end
+  # def configure_sign_in_params
+  #   devise_parameter_sanitizer.for(:sign_in) << :email, :password, :confirmation_password, :encrypted_password
+  # end
 end

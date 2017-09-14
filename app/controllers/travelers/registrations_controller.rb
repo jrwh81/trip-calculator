@@ -1,16 +1,18 @@
 class Travelers::RegistrationsController < Devise::RegistrationsController
-# before_filter :configure_sign_up_params, only: [:create]
-# before_filter :configure_account_update_params, only: [:update]
+#before_filter :configure_sign_up_params, only: [:create]
+before_action :configure_permitted_paramters, only: [:create, :complete_signup, :edit, :update]
+#before_filter :configure_account_update_params, only: [:update]
 
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  #GET /travelers/sign_up
+  def new
+    super
+  end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+  #POST /travelers
+  def create
+    @traveler = Traveler.new(traveler_params)
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -36,7 +38,20 @@ class Travelers::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def configure_permitted_paramters
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:first_name, :last_name, :password, :password_confirmation)} 
+    #devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:new_email, :confirm_new_email) }
+    #devise_parameter_sanitizer.for(:update) {|u| u.permit(:cancel_membership)}
+  end  
+
+  private
+
+  def traveler_params
+    params.require(:traveler).permit(:first_name, :last_name, :password, :password_confirmation)
+  end
+
 
   # You can put the params you want to permit in the empty array.
   # def configure_sign_up_params

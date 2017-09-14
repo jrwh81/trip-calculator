@@ -1,12 +1,19 @@
 Rails.application.routes.draw do  
-  #devise_for :travelers, controllers: { sessions: 'travelers/sessions' }
-  devise_for :travelers, path: 'auth', path_names: { sign_in: 'login', 
-                                                 sign_out: 'logout',
-                                                 password: 'secret', 
-                                                 confirmation: 'verification', 
-                                                 unlock: 'unblock', registration: 
-                                                'register', sign_up: 'cmon_let_me_in' }
+  get 'home/index'
 
+  resources :exspenses
+
+  #devise_for :travelers, controllers: { sessions: 'travelers/sessions' }
+  devise_for :travelers, controllers:{
+      sessions:           "travelers/sessions",
+      registrations:      "travelers/registrations",
+      omniauth_callbacks: "travelers/omniauth_callbacks"    
+    } 
+
+
+  devise_scope :travelers do
+    get '/travelers/create' => 'travelers/registrations#create'
+  end 
 
   resources :trips
   resources :travelers
@@ -16,8 +23,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  #You can have the root of your site routed with "root"
+  #root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -68,5 +75,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-    root 'home#index'
+  root 'home#index'
 end
