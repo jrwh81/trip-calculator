@@ -1,4 +1,7 @@
-<%= link_to "Home", root_path %>
+Logged In As:&nbsp;<%= current_traveler.user_name if traveler_signed_in? %>&nbsp;
+<%= link_to "Home", root_path %>&nbsp;
+<%= link_to "Trips", trips_path if traveler_signed_in? %>&nbsp;
+<%= link_to "Exspsenses", exspenses_path if traveler_signed_in? %>&nbsp;
 <%= link_to "Sign up", new_traveler_registration_path if !traveler_signed_in? %>&nbsp;
 <%= link_to "Log in", new_traveler_session_path if !traveler_signed_in?%>&nbsp;
 <%= link_to "Logout", destroy_session_path(current_traveler), method: :delete if traveler_signed_in?%>&nbsp;

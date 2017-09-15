@@ -56,6 +56,35 @@ class TripsController < ApplicationController
     end
   end
 
+  def calculate_dues
+    @trip = Trip.find(params[:id])
+    @traveler_count = @trip.travelers.count
+    @total_cost = @trip.total_cost
+    @each_contributes = @total_cost / @traveler_count
+    @contributions = []
+    
+    @trip.travelers.each_with_index do |t, i|
+      @contributions << [t.user_name, traveler_spent(t, @trip.id)]
+    end
+
+    @amounts = []
+    @contributions.each_with_index do |con, ind|
+      @amounts << con[1]
+    end
+
+    @most_paid = @amounts.max
+    @contrib_hash = Hash[@contributions]
+    @contrib_hash.sort_by {|_key, value| value}
+    @paid_most = @contrib_hash.key(@most_paid)
+    @contrib_hash.delete(@paid_most)
+
+    render 'trips/show_totals'        
+  end
+
+  def show_totals
+
+  end
+
   # PATCH/PUT /trips/1
   # PATCH/PUT /trips/1.json
   def update
@@ -81,6 +110,27 @@ class TripsController < ApplicationController
   end
 
   private
+
+    def traveler_spent(t, trip_id)
+      @traveler_contribution = 0
+      @traveler_contribution.to_f
+      t.exspenses.each do |e|
+        if e.trip_id == trip_id
+          @traveler_contribution += e.cost
+        end
+      end
+      return @traveler_contribution.to_f
+    end
+
+    # def determine_final_dues(all_contributions, trip)
+    #   dues = []
+    #   i = trip.travelers.count
+    #   j = 0
+
+    #   while j <= i do
+
+    # end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_trip
       @trip = Trip.find(params[:id])

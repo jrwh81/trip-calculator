@@ -1,13 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Trip:</strong>
+  <%= @trip.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
   <%= @exspense.name %>
 </p>
 
 <p>
   <strong>Cost:</strong>
   <%= @exspense.cost %>
+</p>
+
+<p>
+  <strong>Paid By:</strong>
+  <%= @traveler.user_name %>
 </p>
 
 <%= link_to 'Edit', edit_exspense_path(@exspense) %> |

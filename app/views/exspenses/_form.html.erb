@@ -12,12 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :type %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :cost %><br>
-    <%= f.number_field :cost %>
+    <%= f.text_field :cost %>
+  </div>
+    <div class="field">
+    <%= f.hidden_field :trip_id, value: params[:format] %>
   </div>
   <div class="actions">
     <%= f.submit %>

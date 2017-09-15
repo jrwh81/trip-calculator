@@ -31,8 +31,11 @@ Rails.application.routes.draw do
 
   resources :trips, only: [:index,:new,:create,:show,:edit,:update]
   post 'trip/add_traveler/:id' => 'trips#add_traveler_to_trip'
-  
+  post 'trip/calculate_dues/:id' => 'trips#calculate_dues'
+  get  'trip/show_totals' =>  'trips#show_totals'
   resources :travelers
+
+  resources :exspenses, only: [:index,:new,:create,:show,:edit,:update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

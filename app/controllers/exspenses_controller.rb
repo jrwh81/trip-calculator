@@ -10,6 +10,10 @@ class ExspensesController < ApplicationController
   # GET /exspenses/1
   # GET /exspenses/1.json
   def show
+    @exspense = Exspense.find(params[:id])
+    @traveler = Traveler.find(@exspense.traveler_id)
+    @trip = Trip.find(@exspense.trip_id)
+    @trip_exspenses = @trip.exspenses
   end
 
   # GET /exspenses/new
@@ -24,7 +28,7 @@ class ExspensesController < ApplicationController
   # POST /exspenses
   # POST /exspenses.json
   def create
-    @exspense = Exspense.new(exspense_params)
+    @exspense = Exspense.new(exspense_params.merge(trip_id: params[:exspense][:trip_id], traveler_id: current_traveler.id))
 
     respond_to do |format|
       if @exspense.save

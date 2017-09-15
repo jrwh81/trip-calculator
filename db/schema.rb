@@ -11,16 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914070238) do
+ActiveRecord::Schema.define(version: 20170914112449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "exspenses", force: :cascade do |t|
     t.string   "name"
-    t.decimal  "cost",       precision: 10, scale: 2
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.decimal  "cost",        precision: 10, scale: 2
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "trip_id"
+    t.integer  "traveler_id"
   end
 
   create_table "travelers", force: :cascade do |t|
@@ -38,11 +40,11 @@ ActiveRecord::Schema.define(version: 20170914070238) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.decimal  "total_cost",  precision: 10, scale: 2
+    t.decimal  "total_cost",  precision: 10, scale: 2, default: 0.0
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
 end

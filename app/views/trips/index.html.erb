@@ -5,20 +5,21 @@
 <table>
   <thead>
     <tr>
-      <th>Total cost</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
+      <th>Total cost</th>&nbsp;
+      <th>Name</th>&nbsp;
+      <th>Description</th>&nbsp;
+      <th>Actions</th>&nbsp;
     </tr>
   </thead>
 
   <tbody>
     <% @trips.each do |trip| %>
       <tr>
-        <td><%= trip.total_cost %></td>
-        <td><%= trip.name %></td>
-        <td><%= trip.description %></td>
-        <td><%= link_to 'Join Trip', "/trip/add_traveler/#{current_traveler.id}", method: :add_traveler_to_trip unless current_traveler.trips.include?(trip) %></td>
+        <td><%= trip.total_cost %></td>&nbsp;
+        <td><%= trip.name %></td>&nbsp;
+        <td><%= trip.description %></td>&nbsp;
+        <td><%= link_to 'Calculate Dues', "/trip/calculate_dues/#{trip.id}", method: :calculate_dues if current_traveler.trips.include?(trip) %></td>
+        <td><%= link_to 'Join Trip', "/trip/add_traveler/#{trip.id}", method: :add_traveler_to_trip unless current_traveler.trips.include?(trip) %></td>
         <td><%= link_to 'Show', trip %></td>
         <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
         <td><%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,6 +28,6 @@
   </tbody>
 </table>
 
-<br>
+<br />
 
 <%= link_to 'New Trip', new_trip_path %>

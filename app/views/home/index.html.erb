@@ -27,10 +27,35 @@
                   <% end %>
                </tbody>
             </table>
-         </div></center>
+         </div></center><br />
+      <% end %>
+      <% if current_traveler.exspenses.present? %>
+         <center>My Exspenses</center>
+         <center><div class="table-responsive">
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th>Trip&nbsp;</th>
+                     <th>Type&nbsp;</th>
+                     <th>Cost&nbsp;</th>
+                  </tr>
+               </thead>
+               <br>
+               <tbody>
+                  <% current_traveler.exspenses.each do |exspense| %>
+                  <tr>
+                     <td><%= "#{Trip.find(exspense.trip_id).name}" %></td>
+                     <td><%= "#{exspense.name}" %></td>
+                     <td><%= "#{exspense.cost}" %></td>
+                     <td><%= link_to 'Show', trip_path(exspense.trip_id) %></td>
+                  </tr>
+                  <% end %>
+               </tbody>
+            </table>
+         </div></center>         
       <% end %>   
       <br />
-      <%= link_to "Create a Trip", new_trip_path %><br />
+      <%= link_to "Create a Trip", new_trip_path %><br /><br />
       <%= link_to "Join a Trip", trips_path %><br />
 
 

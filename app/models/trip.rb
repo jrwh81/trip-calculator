@@ -1,5 +1,5 @@
 class Trip < ActiveRecord::Base
-   validates   :total_cost, :presence => true
+   validates   :total_cost, :presence => false
    validates   :name, :presence => true
    validates   :description, :presence => true
 

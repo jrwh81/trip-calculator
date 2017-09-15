@@ -1,0 +1,29 @@
+<div>
+<h1>Trip Name: <%= @trip.name %></h1><br />
+<h2>Total Cost: $<%= @total_cost %></h2>
+<h3>Each Contributes: $<%= @each_contributes.round(2) %></h3>
+<h3>Most Paid: $<%= @most_paid %></h3>
+<h3>Paid By: <%= @paid_most %></h3>
+
+<h3>Travelers and Contributions</h3>
+<% @contributions.each do |con| %>
+   <div id="<%= con[0] %>" value="<%= con[1] %>">User Name: <%= con[0] %></div>
+   <div id="<%= con[0] %>" value="<%= con[1] %>">Contribution: $<%= con[1] %></div><br />
+<% end %>
+</div>
+
+<h3>Final Outcome</h3><br />
+<% @contrib_hash.each do |key, val| %>
+   <p><%= @contrib_hash.key(val) %> Owes <%= @paid_most %> $<%= @each_contributes.round(2) - @contrib_hash.values_at(key).join.to_f %>
+<% end %>
+
+<div id="traveler_count" style="display: none;" value="<%= @traveler_count %>">
+<div id="total_cost" style="display: none;" value="<%= @total_cost %>">
+
+
+<script>
+for(i = 0; i < $('#traveler_count').attr("value"); i++){
+   window['user_'+i] = $('#traveler_'+i).attr("value")
+   window['value_'+i] = $('#value_'+i).attr("value")
+}
+</script>

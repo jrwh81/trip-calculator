@@ -9,7 +9,7 @@
 
 <p>
   <strong>Total cost:</strong>
-  <%= @trip.total_cost %>
+  $<%= @trip.total_cost %>
 </p>
 
 <p>
@@ -19,7 +19,14 @@
   <% end %>
 </p>
 
-<%= link_to 'Add a Traveler', trip_path(@trip) %> |
+<p>
+  <strong>Expenses:</strong><br />
+  <% @trip.exspenses.each do |expense| %>
+   <%= "Type: #{expense.name} - Cost:$#{expense.cost} - Paid By: #{Traveler.find(expense.traveler_id).user_name}" %><br />
+  <% end %>
+</p>
+
+<%= link_to 'Add a Traveler', trips_path %> |
 <%= link_to 'Add an Exspense', new_exspense_path(@trip) %> |
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>
