@@ -1,5 +1,8 @@
 class Exspense < ActiveRecord::Base
 
+   validates :name, :presence => true
+   validates :cost, :presence => true 
+
    has_one :trip
    has_one :traveler
 
