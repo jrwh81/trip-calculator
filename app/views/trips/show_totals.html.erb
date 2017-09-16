@@ -14,7 +14,7 @@
 
 <h3>Final Outcome</h3><br />
 <% @contrib_hash.each do |key, val| %>
-   <p><%= @contrib_hash.key(val) %> Owes <%= @paid_most %> $<%= @each_contributes.round(2) - @contrib_hash.values_at(key).join.to_f %>
+   <p><%= @contrib_hash.key(val) %> owes <%= @paid_most %> $<%= (@each_contributes.round(2) - @contrib_hash.values_at(key).join.to_f).round(2) %>
 <% end %>
 
 <div id="traveler_count" style="display: none;" value="<%= @traveler_count %>">

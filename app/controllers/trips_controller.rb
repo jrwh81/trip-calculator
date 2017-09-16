@@ -41,7 +41,6 @@ class TripsController < ApplicationController
   end
 
   def add_traveler_to_trip
-    byebug
     @new_trip_member = TravelersTrip.new(trip_id: params[:id], traveler_id: current_traveler.id)
     @new_trip_member.save!
 
