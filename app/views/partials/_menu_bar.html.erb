@@ -1,4 +1,4 @@
-Logged In As:&nbsp;<%= current_traveler.user_name if traveler_signed_in? %>&nbsp;
+<%="Logged In As: #{current_traveler.user_name}" if traveler_signed_in? %>&nbsp;
 <%= link_to "Home", root_path %>&nbsp;
 <%= link_to "Trips", trips_path if traveler_signed_in? %>&nbsp;
 <%= link_to "Exspsenses", exspenses_path if traveler_signed_in? %>&nbsp;
