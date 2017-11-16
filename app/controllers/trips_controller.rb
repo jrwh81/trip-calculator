@@ -57,9 +57,9 @@ class TripsController < ApplicationController
 
   def calculate_dues
     @trip = Trip.find(params[:id])
-    @traveler_count = @trip.travelers.count
+    traveler_count = @trip.travelers.count
     @total_cost = @trip.total_cost
-    @each_contributes = @total_cost / @traveler_count
+    @each_contributes = @total_cost / traveler_count
     @contributions = []
     
     @trip.travelers.each_with_index do |t, i|
